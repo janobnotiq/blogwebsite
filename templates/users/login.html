@@ -3,7 +3,7 @@
 
 {% block content %}
 <div class="content-section my-5 mx-5">
-    <form method="POST">
+    <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         <fieldset class="form-group">
             <legend class="border-bottom mb-4">Log in</legend>
