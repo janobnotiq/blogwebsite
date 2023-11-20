@@ -14,8 +14,13 @@ class Post(models.Model):
     class Meta:
         verbose_name = 'Sent post'
 
+    @property
     def total_likes(self):
         return self.likes.count()
+    
+    @total_likes.setter
+    def total_likes(self,p):
+        self.total_likes += p
 
     def __str__(self) -> str:
         return self.title

@@ -1,5 +1,4 @@
 {% extends 'base.html' %} {% load bootstrap5 %} {% block content %} 
-
 {% if user.is_authenticated %}
   <div
     class="card"
@@ -38,27 +37,29 @@
         ><i class="bi bi-chat-left-text-fill"></i>Leave comment</a
       >
       <form action="{% url 'like_post' post.pk %}" method="post">
+        {% csrf_token %}
         <button
           type="submit"
           name="post_id"
           value="{{post.id}}"
           class="btn btn-outline-danger"
         >
-          <i class="bi bi-hand-thumbs-up"></i>Like {{total_likes}}
+          <i class="bi bi-hand-thumbs-up"></i>{{total_likes}}
         </button>
       </form>
     </div>
   </div>
 {% else %}
-  <div class="my-5 mx-5">
-    <h2 style="text-align: center">You did not log in yet</h2>
-    <p style="text-align: center">In order to see this page, please, log in</p>
-  </div>
-  <br />
-  <hr />
-  <div class="col text-center my-5">
-    <a href="{% url 'login' %}"
-      ><button class="btn btn-lg btn-danger">Log in</button></a
-    >
-  </div>
-{% endif %} {% endblock%}
+<div class="my-5 mx-5">
+  <h2 style="text-align: center">You did not log in yet</h2>
+  <p style="text-align: center">In order to see this page, please, log in</p>
+</div>
+<br />
+<hr />
+<div class="col text-center my-5">
+  <a href="{% url 'login' %}"
+    ><button class="btn btn-lg btn-danger">Log in</button></a
+  >
+</div>
+{% endif %} 
+{% endblock%}
