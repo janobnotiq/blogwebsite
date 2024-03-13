@@ -4,7 +4,7 @@ mig:
 
 
 run:
-	python manage.py runserver
+	python manage.py runserver 9000
 
 
 git:

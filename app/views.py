@@ -46,17 +46,12 @@ class PostCreateView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
-class PostDetailView(DetailView):
-    model = Post
+def post_detail(request,pk):
+    post = get_object_or_404(Post,id=pk)
+    total_likes = post.total_likes
+    comments = Comment.objects.filter(post__id=pk)
 
-    def get_context_data(self,*args, **kwargs):
-        stuff = get_object_or_404(Post,id=self.kwargs['pk'])
-        total_likes = stuff.total_likes
-        context = {
-            "total_likes":total_likes,
-            "post":stuff,
-        }
-        return context
+    return render(request,"app/post_detail.html",{"post":post,"total_likes":total_likes,"comments":comments})
 
 
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
@@ -91,8 +86,12 @@ def like_view(request,pk):
     return HttpResponseRedirect(reverse('posts'))
 
 
-class CommentListView(LoginRequiredMixin, ListView):
-    model = Comment
-    template_name = 'app/post-comment.html'
-    context_object_name = 'comments'
-    ordering = ['-date_sent']
+def most_viewed(request):
+    posts = Post.objects.filter(likes__gt=1)
+
+    return render(request,"app/popular_posts.html",{"posts":posts})
+
+def latest(request):
+    posts = Post.objects.order_by("-date_posted")[:4]
+
+    return render(request,"app/latest_posts.html",{"posts":posts})

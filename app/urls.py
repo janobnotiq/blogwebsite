@@ -1,11 +1,11 @@
 from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
-from .views import (mainpage,
-                    PostListView, PostDetailView,
+from .views import (latest, mainpage,
+                    PostListView,
                     PostUpdateView, PostCreateView,
                     PostDeleteView, UserPostListView,
-                    CommentListView,like_view)
+                    like_view, most_viewed, post_detail)
 
 urlpatterns = [
     path('', mainpage, name='main-page'),
@@ -17,8 +17,9 @@ urlpatterns = [
     path('post/<int:pk>/update/',
          PostUpdateView.as_view(template_name="app/post_update.html"),
            name='post-update'),
-    path('post/<int:pk>/', PostDetailView.as_view(), name='post-detail'),
+    path('post/<int:pk>/', post_detail, name='post-detail'),
     path('post/<int:pk>/delete/', PostDeleteView.as_view(), name='post-delete'),
-    path('post/<int:pk>/comments', CommentListView.as_view(), name='comments'),
     path('like/<int:pk>/',like_view,name="like_post"),
+    path('posts/popular/',most_viewed,name="popular-posts"),
+    path('posts/latest/',latest,name="latest-posts"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -18,12 +18,12 @@
         alt="Photo of the author"
       />
     </div>
-    <h6 class="text-muted">{{object.author.profile}}</h6>
+    <h6 class="text-muted">{{post.author.profile}}</h6>
     <div class="card-body">
-      <h5 class="card-title">{{object.title}}</h5>
-      <h6 class="card-subtitle text text-muted">{{object.date_posted}}</h6>
+      <h5 class="card-title">{{post.title}}</h5>
+      <h6 class="card-subtitle text text-muted">{{post.date_posted}}</h6>
       <br />
-      <p class="card-text">{{object.content}}</p>
+      <p class="card-text">{{post.content}}</p>
     </div>
     <div class="card-footer">
       <a href="{% url 'post-update' post.id %}">
@@ -48,6 +48,16 @@
         </button>
       </form>
     </div>
+  </div>
+  <div class="comments">
+    {% for comment in comments %}
+    <div class="card-body" style="border: 2px solid dodgerblue;">
+      <i class="bi bi-person-fill"></i>{{comment.sender}}
+      <h6 class="card-subtitle text text-muted">{{comment.date_sent}}</h6>
+      <br />
+      <p class="card-text">{{comment.text}}</p>
+    </div>  
+    {% endfor %}
   </div>
 {% else %}
 <div class="my-5 mx-5">
