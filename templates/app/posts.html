@@ -20,7 +20,7 @@ Posts
 </a>
         <h6 class="card-subtitle text text-muted">{{post.date_posted}}</h6><br>
         <p class="card-text">{{post.content}}</p>
-        <a href="#" class="btn btn-outline-dark"><i class="bi bi-chat-left-text-fill"></i>Leave comment</a>
+        <a href="{% url 'leave-comment' post_id=post.id %}" class="btn btn-outline-dark"><i class="bi bi-chat-left-text-fill"></i>Leave comment</a>
         <br><br>
         <form action="{% url 'like_post' post.pk %}" method="post">
             {% csrf_token %}
