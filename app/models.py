@@ -12,7 +12,7 @@ class Post(models.Model):
     likes = models.ManyToManyField(User, related_name="posts")
 
     class Meta:
-        verbose_name = 'Sent post'
+        verbose_name = 'Post'
 
     @property
     def total_likes(self):
@@ -35,3 +35,7 @@ class Comment(models.Model):
     sender = models.ForeignKey(User, on_delete=models.PROTECT)
     date_sent = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True)
+
+    def __str__(self) -> str:
+        fullname = self.sender.first_name + " " + self.sender.last_name
+        return fullname
