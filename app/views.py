@@ -1,6 +1,6 @@
 from multiprocessing import get_context
 from typing import Any, Dict
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import redirect, render, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import (ListView,
                                   DetailView,
@@ -11,6 +11,7 @@ from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from .models import Post, Comment
+from .forms import CommentForm
 
 
 def mainpage(request):
@@ -50,7 +51,7 @@ class PostCreateView(LoginRequiredMixin, CreateView):
 def post_detail(request,pk):
     post = get_object_or_404(Post,id=pk)
     total_likes = post.total_likes
-    comments = Comment.objects.filter(post__id=pk)
+    comments = Comment.objects.filter(post__id=pk).order_by("-date_sent")
 
     return render(request,"app/post_detail.html",{"post":post,"total_likes":total_likes,"comments":comments})
 
@@ -96,3 +97,21 @@ def latest(request):
     posts = Post.objects.order_by("-date_posted")[:4]
 
     return render(request,"app/latest_posts.html",{"posts":posts})
+
+def leave_comment(request,post_id):
+    post = get_object_or_404(Post, id=post_id)
+
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.post = post
+            comment.sender = request.user
+            comment.save()
+            return redirect('post-detail', pk=post.pk)  # Redirect to the post detail page
+    else:
+        form = CommentForm()
+
+    return render(request, 'app/add-comment.html', {'form': form,"post":post})
+
+    

@@ -1,7 +1,7 @@
 from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
-from .views import (latest, mainpage,
+from .views import (latest, leave_comment, mainpage,
                     PostListView,
                     PostUpdateView, PostCreateView,
                     PostDeleteView, UserPostListView,
@@ -18,6 +18,7 @@ urlpatterns = [
          PostUpdateView.as_view(template_name="app/post_update.html"),
            name='post-update'),
     path('post/<int:pk>/', post_detail, name='post-detail'),
+    path("post/<int:post_id>/comment/",leave_comment,name="leave-comment"), # type: ignore
     path('post/<int:pk>/delete/', PostDeleteView.as_view(), name='post-delete'),
     path('like/<int:pk>/',like_view,name="like_post"),
     path('posts/popular/',most_viewed,name="popular-posts"),

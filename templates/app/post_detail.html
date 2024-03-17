@@ -33,9 +33,10 @@
         <button class="btn btn-lg btn-danger">Delete</button></a
       >
       <br /><br />
-      <a href="#" class="btn btn-outline-dark"
+      <a href="{% url 'leave-comment' post_id=post.id %}" class="btn btn-outline-dark"
         ><i class="bi bi-chat-left-text-fill"></i>Leave comment</a
       >
+      <br><br>
       <form action="{% url 'like_post' post.pk %}" method="post">
         {% csrf_token %}
         <button
@@ -49,6 +50,8 @@
       </form>
     </div>
   </div>
+  <br>
+  <br>
   <div class="comments">
     {% for comment in comments %}
     <div class="card-body" style="border: 2px solid dodgerblue;">
