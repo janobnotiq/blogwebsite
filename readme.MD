@@ -1,11 +1,4 @@
-<p align="left">Blog project</p>
-
-###
-
-<div align="left">
-#loyiha #project
-
-🔴 Blogwebsite
+<h3 style="text-align: center;">🔴 Blogwebsite</h3>
 
 Bu loyiha django freymvorki yordamida qilingan. Quyida unda bor xususiyat(feature)larni aytib o'taman.
 
@@ -59,7 +52,7 @@ Yana qo'shilishi kerak bo'lgan jihatlar(lekin bu loyihani juda cho'zib yubormoqc
 ✅ <a href="https://youtu.be/wPqwJB7Zv3o?feature=shared" target="_blank">Ushbu link</a> orqali shu loyihaning 9 daqiqalik namoyishini ko'rishingiz mumkin, ko'rish tezligini 1.5x qilib ko'rish tavsiya etiladi.
 
 
-  <a href="https://www.linkedin.com/in/ulug-bek-tojimakhammatov-8434b125a/" target="_blank">
+  <a href="https://www.linkedin.com/in/ulug-bek-tojimakhammatov%F0%9F%87%B5%F0%9F%87%B8-8434b125a/" target="_blank">
     <img src="https://raw.githubusercontent.com/maurodesouza/profile-readme-generator/master/src/assets/icons/social/linkedin/default.svg" width="52" height="40" alt="linkedin logo"  />
   </a>
   <a href="https://www.youtube.com/channel/@ulugbekpy" target="_blank">
